@@ -9,19 +9,21 @@ import {
   StatusBar,
 } from "react-native";
 import TaskListItem from "./TaskListItem";
+import { useRealm, useQuery } from "@realm/react";
+import { Task } from "../models/Task";
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([
-    { id: "123", description: "First task" },
-    { id: "234", description: "Second task" },
-    { id: "345", description: "Third task" },
-  ]);
+  const realm = useRealm();
+  const tasks = useQuery(Task);
 
   const [newTask, setNewTask] = useState("");
   const createTask = () => {
-    setTasks([...tasks, { id: "567", description: newTask }]);
+    realm.write(() => {
+      realm.create(Task, { description: newTask, user_id: "123" });
+    });
     setNewTask("");
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todo</Text>

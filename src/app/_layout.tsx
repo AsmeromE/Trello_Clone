@@ -10,6 +10,7 @@ export default function RootLayout() {
         <Realm>
           <Stack screenOptions={{}}></Stack>
         </Realm>
+        {/* <StatusBar style="light" /> */}
       </ThemeProvider>
       <StatusBar style="light" />
     </>
