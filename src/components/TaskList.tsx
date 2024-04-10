@@ -9,17 +9,19 @@ import {
   StatusBar,
 } from "react-native";
 import TaskListItem from "./TaskListItem";
-import { useRealm, useQuery } from "@realm/react";
+import { useRealm, useQuery, useUser } from "@realm/react";
 import { Task } from "../models/Task";
 
 const TaskList = () => {
   const realm = useRealm();
   const tasks = useQuery(Task);
 
+  const user = useUser();
+
   const [newTask, setNewTask] = useState("");
   const createTask = () => {
     realm.write(() => {
-      realm.create(Task, { description: newTask, user_id: "123" });
+      realm.create(Task, { description: newTask, user_id: user.id });
     });
     setNewTask("");
   };
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   },
   input: {
     color: "white",
-    padding: 15,
+    padding: 5,
     borderRadius: 5,
     backgroundColor: "#102125",
   },

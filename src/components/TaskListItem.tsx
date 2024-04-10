@@ -30,7 +30,7 @@ export default function TaskListItem({ task }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1D2125",
-    padding: 10,
+    padding: 8,
     borderRadius: 5,
     flexDirection: "row",
     justifyContent: "space-between",
